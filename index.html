@@ -4,6 +4,20 @@
     document.oncontextmenu = function(){return false;}
 
 </script>
+<script>
+    function copyText() {
+        // 1. id가 'target-text'인 요소의 글자(innerText)를 가져옵니다.
+        const text = document.getElementById("target-text").innerText;
+        // 2. 클립보드 API를 사용하여 텍스트를 복사합니다.
+        navigator.clipboard.writeText(text).then(() => {
+            // 3. 복사 완료 후 사용자에게 피드백 제공
+            alert("클립보드에 복사되었습니다: " + text);
+        }).catch(err => {
+            // 예외 처리 (권한 거부 등)
+            console.error('복사에 실패했습니다.', err);
+        });
+    }
+</script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,7 +140,7 @@
       <div class="menu">
         <a href="#product">제품소개 Products</a>
         <a href="#cases">구축사례 Case Study</a>
-        <a href="#newsletter">뉴스레터 NewsLetter</a>
+        <!--<a href="#newsletter">뉴스레터 NewsLetter</a> -->
         <a href="#webinar">웨비나 Webinar</a>
         <a href="#about">회사소개 Company</a>
         <a href="#contact">연락처 Contact us</a>
@@ -259,7 +273,10 @@
   <section id="contact">
     <h2>연락처 </h2>
     <p>궁금하신 사항은 언제든지 MariaDB 한국 Sales로 문의해 주세요</p>
-    <p>이메일 : social.korea@mariadb.com</p>
+    <div class="copy-card">
+        <p id="target-text">social.korea@mariadb.com</p>
+        <button class="copy-btn" onclick="copyText()">이메일 주소 복사하기</button>
+  </div>
   </section>
 
   <footer>
